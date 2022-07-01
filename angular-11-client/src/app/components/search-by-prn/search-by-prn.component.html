@@ -1,0 +1,74 @@
+<br/>
+<main>
+  <div class="container">
+        <div class="card text-center">
+            <div class="card-header">
+              <img src="assets/card_fligh_img.png" class="center" style="width: 7rem;" alt="..." /> 
+              <p style="clear:both"><b>Find Ticket</b> </p>
+            </div>
+            <div class="card-body text-center ">
+                <div [formGroup]="search_ticket_form">   
+                    <div class="row">
+                      <div class="col-md-3"></div>
+                        <div class="col-md-5">
+                            
+                            <div class="mat-form-field--inline">
+                                <mat-form-field >
+                                  <input matInput type="number"  formControlName="prnNumber" [(ngModel)]="prnNumber" placeholder="Enter PRN Number">
+                                  <button *ngIf="prnNumber"  matSuffix mat-icon-button aria-label="Clear" (click)="prnNumber=''">
+                                    <mat-icon>close</mat-icon>
+                                  </button>
+                                  <mat-error *ngIf="search_ticket_form.controls['prnNumber'].hasError('required') && (search_ticket_form.controls['prnNumber'].dirty || search_ticket_form.controls['prnNumber'].touched)" >
+                                    This field is required
+                                  </mat-error>
+                                </mat-form-field>
+                                <!-- <span class="text-danger" *ngIf="search_flight_form.controls['fromplace'].hasError('required') && (search_flight_form.controls['fromplace'].dirty || search_flight_form.controls['fromplace'].touched)">This field is required</span> -->
+                              </div>
+                              <div class="text-center">
+                              <button class="btn btn-primary" (click)="serachByPRN()" type="submit"><i class="fa fa-fw fa-search"></i>Search Ticket</button>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+                <div *ngIf="searchedSuccess">
+                
+                  <!-- <div class="col-md-3"></div> -->
+                  <div class="searched">
+                    <h1>Ticket Details</h1>
+                    <div class="row">
+                      
+                      <div class="col-md-2"></div>
+                        <div class="col-md-4">
+                          <p>PRN:- <b>{{bookingTicket.pnrNumber}}</b></p>
+                          
+                          <p>From Place:- <b>{{airlineDetail.fromPlace}}</b></p>
+                          <p>To Place:- <b>{{airlineDetail.toPlace}}</b></p>
+                          <p>Departure Date:- <b>{{airlineDetail.departDate | date:'dd/MM/yyyy' }}</b></p>
+                          <p>Departure Time:- <b>{{airlineDetail.departureTime}}</b></p>
+        
+                          
+                      </div>
+                      <div class="col-md-4">
+                        <p>Name:- <b>{{bookingTicket.name}}</b></p>
+                        <p>Seat Number:- <b>{{bookingTicket.seatNumber}}</b></p>
+                        <p>Email:- <b>{{bookingTicket.email}}</b></p>
+                        <p>Gender:- <b>{{bookingTicket.gender}}</b></p>
+                        <p>Age:- <b>{{bookingTicket.age}}</b></p>
+                      </div>
+                      <div class="col-md-2"></div>
+                    </div>
+                      
+
+                      </div>
+                      </div>
+                      <br/><br/>
+                      <div *ngIf="emptyRecord" class="text-center alert alert-danger">
+                        <p class="" >No records found</p>
+                      </div>
+                
+
+
+            </div>
+        </div>
+    </div>
+</main>

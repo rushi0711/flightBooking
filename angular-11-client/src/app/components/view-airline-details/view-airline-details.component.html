@@ -1,0 +1,104 @@
+<br/><main>
+    <div class="container">
+  
+      <div class="card text-center">
+        <div class="card-header">
+            <img src="assets/card_fligh_img.png" class="center" style="width: 7rem;" alt="..." /> 
+              <p style="clear:both"><b>Flight Details</b> </p>
+        </div>
+        <div class="card-body">
+          <!-- <h5 class="card-title">Card title/h5> -->
+          
+            <div [formGroup]="flight_form_detail">   
+                <div class="row">
+                    <!-- <div class="col-12"> -->
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="fromPlaceLabel">From Place</span>
+                                <input type="text" class="form-control" formControlName="fromplace" [(ngModel)]="airlineDetail.fromPlace" placeholder="Enter from place" aria-label="From place input" aria-describedby="inputGroup-from-place" [attr.disabled]="butDisabled">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="toPlaceLable">To Place</span>
+                                <input type="text" formControlName="toPlace" class="form-control" [(ngModel)]="airlineDetail.toPlace" placeholder="Enter to place" aria-label="To place input" aria-describedby="inputGroup-to-plcae" [attr.disabled]="butDisabled">
+                            </div>
+                            <div class="input-group mb-3 ">
+                                <span class="input-group-text" id="airlineLable">Choose Airline</span>
+                                <select formControlName="airline" [(ngModel)]="airlineDetail.airline" [attr.disabled]="butDisabled">
+                                    <!-- <option [ngValue]="null" >Select Airline</option> -->
+                                    <option class="form-control" *ngFor="let c of airlines" [ngValue]="c.id"><b>{{c.name}}</b></option>
+                                  </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="scheduleDaysLable">Schedule Days</span>
+                                <select formControlName="scheduleDays" [(ngModel)]="airlineDetail.scheduleDays" [attr.disabled]="butDisabled">
+                                    <option [ngValue]="null" selected disabled>Select schedule days</option>
+                                    <option class="form-control" *ngFor="let s of scheduleDays" [ngValue]="s.id">{{s.name}}</option>
+                                  </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="departDateLabel">Departure Date</span>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Choose a date</mat-label>
+                                    <input matInput [matDatepicker]="picker" formControlName="departDate" [(ngModel)]="airlineDetail.departDate" [disabled]="butDisabled">
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="butDisabled"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker [disabled]="butDisabled"></mat-datepicker>
+                                  </mat-form-field>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="departTimeLabel">Departure Time</span>
+                                <input type="time" formControlName="departTime" class="form-control" [(ngModel)]="airlineDetail.departureTime" placeholder="Enter departure time" aria-label="departure time input" aria-describedby="inputGroup-departure-time" [attr.disabled]="butDisabled">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="arrivalTimeLabel">Arrival Time</span>
+                                <input type="time" formControlName="arrivalTime" class="form-control" [(ngModel)]="airlineDetail.arrivalTime" placeholder="Enter arrival time" aria-label="arrival time input" aria-describedby="inputGroup-darrival-time" [attr.disabled]="butDisabled">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="tripTypeLabel">Trip Type</span>
+                                <mat-radio-group  class="form-control" formControlName="tripType" [(ngModel)]="airlineDetail.tripType" aria-label="Select an option" [disabled]="butDisabled">
+                                    <mat-radio-button value="One-Way">One Way</mat-radio-button>
+                                    <mat-radio-button value="Return">Return</mat-radio-button>
+                                 </mat-radio-group>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="istrumentUsedLabel">Instrument Used</span>
+                                <select formControlName="istrumentUsed" [(ngModel)]="airlineDetail.instrumentUsed" [attr.disabled]="butDisabled">
+                                    <option [ngValue]="null" selected disabled>Select Instrument used</option>
+                                    <option class="form-control" *ngFor="let c of instrumentUsed" [ngValue]="c.id">{{c.name}}</option>
+                                  </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="businessSeatsLabel">Business Seats</span>
+                                <input type="number" class="form-control" formControlName="businessSeats" [(ngModel)]="airlineDetail.businessSeats" placeholder="Enter business seats" aria-label="business seats input" aria-describedby="inputGroup-business-seats" [attr.disabled]="butDisabled">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="economySeatsLabel">Economy Seats</span>
+                                <input type="number" class="form-control" formControlName="economySeats" [(ngModel)]="airlineDetail.economySeats" placeholder="Enter economy seats" aria-label="economy seats input" aria-describedby="inputGroup-economy-seats" [attr.disabled]="butDisabled">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="itemPricePrice">Ticket Cost</span>
+                                <input type="number" class="form-control" formControlName="itemPrice" [(ngModel)]="airlineDetail.ticketCost" placeholder="Enter ticket cost" aria-label="ticket Cost input" aria-describedby="inputGroup-ticket-Cost" [attr.disabled]="butDisabled">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="noOfRowsLabel">Number of Rows</span>
+                                <input type="number" class="form-control" formControlName ="noOfRows" [(ngModel)]="airlineDetail.noOfRows" placeholder="Enter number of rows" aria-label="Number of rows input" aria-describedby="inputGroup-no-rows" [attr.disabled]="butDisabled">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="mealTypeLabel">Meal Type</span>
+                                <mat-radio-group class="form-control" formControlName="mealType" [(ngModel)]="airlineDetail.mealType" aria-label="Select an option" [disabled]="butDisabled">
+                                    <mat-radio-button value="Veg">Veg</mat-radio-button>
+                                    <mat-radio-button value="Non-Veg">Non-Veg</mat-radio-button>
+                                 </mat-radio-group>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+        </div>
+
+          </div>
+        </div>
+      </div>
+  </div>
+  </main>

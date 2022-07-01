@@ -1,0 +1,30 @@
+.mat-form-field--inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.mat-form-field--inline .mat-form-field {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.mat-form-field--inline .mat-form-field:nth-child(1) {
+    margin-right: 10px;
+}
+
+/* .child-bg-class {
+    background-color: rgb(218, 154, 71);
+  }
+
+  .child-bg-class-2 {
+    background-color: rgb(216, 212, 206);
+  } */
+  
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }

@@ -1,0 +1,68 @@
+<div fxLayout="column" fxFlexFill>
+  
+  <!-- <div id="app"> -->
+      <nav class="navbar navbar-expand-md navbar-bg-class">
+      <a href="#" class="navbar-brand"><i class="fa fa-left fa-location-arrow"></i><span class="label">FlyHigh</span></a>
+      <ul class="navbar-nav mr-auto" routerLinkActive="active">
+        <li class="nav-item">
+          <a href="/home" class="nav-link" routerLink="home"><i class="fa fa-fw fa-home"></i> Home </a>
+        </li>
+        <li class="nav-item" *ngIf="!showAdminBoard">
+          <a href="/flightSearch" class="nav-link" routerLink="flightSearch"><i class="fa fa-fw fa-search"></i> Search Flight </a>
+        </li>
+        <li class="nav-item" *ngIf="showAdminBoard">
+          <a href="/addFlight" class="nav-link" routerLink="addFlight"><i class="fa fa-plane" aria-hidden="true"></i> Add Flight</a>
+        </li>
+        <li class="nav-item" *ngIf="showAdminBoard">
+          <a href="/scheduledFlights" class="nav-link" routerLink="scheduledFlights"><i class="fa fa-plane" aria-hidden="true"></i> Scheduled Flights</a>
+        </li>
+        <li class="nav-item" *ngIf="showAdminBoard">
+          <a href="/viewAllFlights" class="nav-link" routerLink="viewAllFlights"><i class="fa fa-eye" aria-hidden="true"></i> View All Flights</a>
+        </li>
+        <li class="nav-item" *ngIf="!showAdminBoard">
+          <a href="/searchByPRN" class="nav-link" routerLink="searchByPRN"><i class="fa fa-eye" aria-hidden="true"></i> View Ticket</a>
+        </li>
+        <li class="nav-item" *ngIf="showRoleBoard">
+          <a href="/bookingHistory" class="nav-link" routerLink="bookingHistory/{{userEmail}}"><i class="fa fa-history" aria-hidden="true"></i> Flight Booking History</a>
+        </li>
+        
+      </ul>
+  
+      <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+        <li class="nav-item">
+          <a href="/aboutUs" class="nav-link" routerLink="aboutUs"><i class="fa fa-user" aria-hidden="true"> </i> About Us</a>
+        </li>
+        <li class="nav-item">
+          <a href="/register" class="nav-link" routerLink="register"><i class="fa fa-fw fa-user"> </i>Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a href="/login" class="nav-link" routerLink="login"><i class="fa fa-fw fa-user"> </i>Login</a>
+        </li>
+      </ul>
+  
+      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+        <li class="nav-item">
+          <a href class="nav-link" (click)="logout()"><i class="fa fa-fw fa-user"> </i>LogOut({{ username }})</a>
+        </li>
+      </ul>
+    </nav>
+  
+<!--     
+  </div> -->
+
+
+
+
+  <div fxFlex>
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+    <!-- <div class="container">
+      <router-outlet></router-outlet>
+    </div> -->
+  </div>
+  <div class="footer">
+    <app-footer></app-footer>
+  </div>
+  
+</div>

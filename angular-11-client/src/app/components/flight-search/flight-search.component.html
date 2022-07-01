@@ -1,0 +1,127 @@
+<br/>
+<main>
+  <div class="container">
+
+    <div class="card text-center">
+      
+      <div class="card-header">
+        <img src="assets/card_fligh_img.png" class="center" style="width: 7rem;" alt="..." /> 
+        <p style="clear:both"><b>Search Flight</b> </p>
+      </div>
+      
+      <div class="card-body">
+        <!-- <h5 class="card-title">Card title/h5> -->
+        
+          
+          <div [formGroup]="search_flight_form">   
+                <div class="row" style="overflow-x:auto;">
+                    <div>
+                    <div class="mat-form-field--inline">
+                        <mat-form-field >
+                          <input matInput formControlName="fromplace" [(ngModel)]="airlineDetail.fromPlace" placeholder="From Place">
+                          <mat-error *ngIf="search_flight_form.controls['fromplace'].hasError('required') && (search_flight_form.controls['fromplace'].dirty || search_flight_form.controls['fromplace'].touched)" >
+                            This field is required
+                          </mat-error>
+                        </mat-form-field>
+                        <mat-form-field >
+                          <input matInput formControlName="toPlace" [(ngModel)]="airlineDetail.toPlace" placeholder="To Place">
+                          <mat-error *ngIf="search_flight_form.controls['toPlace'].hasError('required') && (search_flight_form.controls['toPlace'].dirty || search_flight_form.controls['toPlace'].touched)" >
+                            This field is required
+                          </mat-error>
+                        </mat-form-field>
+
+                      </div><br/>
+
+                      <div class="mat-form-field--inline">
+                        <mat-form-field appearance="fill">
+                            <mat-label>From Date</mat-label>
+                            <input matInput [matDatepicker]="picker1" formControlName="fromDate" [(ngModel)]="airlineDetail.fromDate" readonly>
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                            <mat-error *ngIf="search_flight_form.controls['fromDate'].hasError('required') && (search_flight_form.controls['fromDate'].dirty || search_flight_form.controls['fromDate'].touched)" >
+                                This field is required
+                            </mat-error>
+                          </mat-form-field>
+
+                          <mat-form-field appearance="fill">
+                            <mat-label>To Date</mat-label>
+                            <input matInput [matDatepicker]="picker2" formControlName="toDate" [(ngModel)]="airlineDetail.toDate" readonly>
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                            <mat-error *ngIf="search_flight_form.controls['toDate'].hasError('required') && (search_flight_form.controls['toDate'].dirty || search_flight_form.controls['toDate'].touched)" >
+                                This field is required
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+ </div>
+<!-- 
+                    <div class="text-center">
+                        
+                    </div> -->
+
+                    <br/><br/>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" type="submit" (click)="searchFlight()"><i class="fa fa-fw fa-search"></i> Search Flight </button>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-secondary" type="submit" (click)="resetForm()">Reset </button>
+                        </div>
+                        <div class="col-md-5"></div>
+                      </div>
+
+
+               
+
+                    <div *ngIf="serachedFlights" style="overflow-x:auto;">
+                        <br/>
+                    <table class="table table-bordered table-light table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">Airline</th>
+                            <th scope="col">From PLace</th>
+                            <th scope="col">To PLace</th>
+                            <th scope="col">Departure Date</th>
+                            <th scope="col">Departure Time</th>
+                            <th scope="col">Schedule Days</th>
+                            <th scope="col">Trip Type</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let u of airlineDetails; index as i">
+                            <td>{{u.airline}}</td>
+                            <td>{{u.fromPlace}}</td>
+                            <td>{{u.toPlace}}</td>
+                            <td>{{u.departDate | date:'dd/MM/yyyy'}}</td>
+                            <td>{{u.departureTime}}</td>
+                            <td>{{u.scheduleDays}}</td>
+                            <td>{{u.tripType}}</td>
+                            <td>
+                              <button mat-raised-button class="btn btn-primary btn-sm" (click)="openBookTicketForm(u.flightNo)"><i class="fa fa-check" aria-hidden="true"></i> Book Tikcet</button>  
+                              
+                              </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="text-center">
+                        <p *ngIf="airlineDetails.length === 0">No records found</p>
+                      </div>
+                    </div>
+                </div>
+                    <br/>
+                    <div *ngIf="bookTicket">
+                        <div class="row">
+                            <br/>
+                            <app-book-ticket [flightNo]="flightNo"></app-book-ticket>
+                        </div>
+                        </div>
+            </div>
+      </div>
+    </div>
+   
+  </div>
+</main>

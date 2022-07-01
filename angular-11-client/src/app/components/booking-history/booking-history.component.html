@@ -1,0 +1,113 @@
+<br/>
+<main>
+    <div class="container">
+        <div class="card ">
+            <div class="card-header text-center">
+              <img src="assets/card_fligh_img.png" class="center" style="width: 7rem;" alt="..." /> 
+              <p style="clear:both"><b>Fight History</b> </p>
+            </div>
+            <div class="card-body" style="overflow-x:auto;">
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">PNR Number</th>
+                        <th scope="col">Seat Number</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Booked Date</th>
+                        <th scope="col">Flight Number</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let bookedTicket of bookedTickets; index as i">
+                        <td>{{bookedTicket.pnrNumber}}</td>
+                        <td>{{bookedTicket.seatNumber}}</td>
+                        <td>{{bookedTicket.name}}</td>
+                        <td>{{bookedTicket.gender}}</td>
+                        <td>{{bookedTicket.age}}</td>
+                        <td>{{bookedTicket.email}}</td>
+                        <td>{{bookedTicket.bookedDate | date:'dd/MM/yyyy'}}</td>
+                        <td>{{bookedTicket.flightNo}}</td>
+                        <td *ngIf="bookedTicket.status">
+                            <button mat-raised-button class="btn btn-primary btn-sm" (click)="downloadPdf(bookedTicket.pnrNumber)"><i class="fa fa-download"></i>&nbsp; Download Ticket</button>&nbsp;&nbsp;
+                            <button mat-raised-button class="btn btn-danger btn-sm" (click)="openModal(bookedTicket.pnrNumber)"><i class="fa fa-close"></i>&nbsp;Cancel</button>
+                        </td>
+                        <td *ngIf="!bookedTicket.status">
+                            <!-- <p class="">Ticket cancelled</p> -->
+                            <button mat-raised-button class="btn btn-primary btn-sm disabled"><i class="fa fa-download"></i>&nbsp; Download Ticket</button>&nbsp;&nbsp;
+                            <button mat-raised-button class="btn btn-danger btn-sm disabled" (click)="openModal(bookedTicket.pnrNumber)">Cancelled</button>
+                        </td>
+                        </tr>
+                    </tbody>
+                  </table>
+                  <div class="text-center">
+                    <p *ngIf="bookedTickets.length === 0">No records found</p>
+                  </div>
+            </div>
+            </div>
+        </div>
+</main>
+
+    
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header modal-bg">
+                      <!-- <h4 class="modal-title">Block Flight</h4> -->
+                      <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+                    </div>
+               <div class="modal-body text-center modal-bg-body">
+                      <form class="example-form" #form="ngForm" (ngSubmit)="onFormSubmit()" ngNativeValidate>
+                       <mat-slide-toggle ngModel name="acceptTerms" required>Please confirm once before cancel your ticket?</mat-slide-toggle><br/><br/>
+                       <button class="btn btn-danger" mat-raised-button type="submit">Confirm</button><br/><br/>
+                       <div class="text-center alert alert-danger" *ngIf="cancelError">
+                        <p >You can not cancel flight before 24 hours of deparature.</p>
+                      </div>
+                     </form>
+                    </div>
+                <div class="modal-footer modal-bg">
+                      <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+                      <!-- <button type="button" class="btn btn-danger">Confirm</button> -->
+                     
+                    </div>
+       </div> 
+        </div>
+</div>
+
+
+<div id="content" #content>
+   
+  <div *ngIf="hideContent" class="searched text-center ">
+    <img src="assets/card_fligh_img.png" class="center" style="width: 7rem;" alt="..." /> 
+              <p style="clear:both"><b>Ticket Details</b> </p>
+    <div class="row">
+      
+      <div class="col-md-2"></div>
+        <div class="col-md-4">
+          <p>PRN - <b>{{bookingTicket.pnrNumber}}</b></p>
+          
+          <p>From Place - <b>{{airlineDetail.fromPlace}}</b></p>
+          <p>To Place - <b>{{airlineDetail.toPlace}}</b></p>
+          <p>Departure Date - <b>{{airlineDetail.departDate | date:'dd/MM/yyyy' }}</b></p>
+          <p>Departure Time - <b>{{airlineDetail.departureTime}}</b></p>
+
+          
+      </div>
+      <div class="col-md-4">
+        <p>Name - <b>{{bookingTicket.name}}</b></p>
+        <p>Seat Number - <b>{{bookingTicket.seatNumber}}</b></p>
+        <p>Email - <b>{{bookingTicket.email}}</b></p>
+        <p>Gender - <b>{{bookingTicket.gender}}</b></p>
+        <p>Age - <b>{{bookingTicket.age}}</b></p>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+      
+
+      </div>
+      </div>

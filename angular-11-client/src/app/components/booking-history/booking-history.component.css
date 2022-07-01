@@ -1,0 +1,28 @@
+.modal-bg-body {
+    background-color: rgb(238, 215, 167);
+  }
+  .modal-bg {
+    background-color: rgb(233, 206, 149);
+  }
+
+  #content {
+    width: 595px;
+    height: 842px;
+  }
+
+
+  .searched {
+    background-color: lightgrey;
+    max-width: 2490px;
+    width: 80%;
+    border: 5px solid rgb(123, 128, 153);
+    padding: 50px;
+    margin: 20px;
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }

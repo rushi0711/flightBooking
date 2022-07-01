@@ -1,0 +1,97 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<br/> 
+<main>
+    <div class="container">
+        <div class="card ">
+            <div class="card-header text-center">
+              <img src="assets/card_fligh_img.png" class="center" style="width: 7rem;" alt="..." /> 
+              <p style="clear:both"><b>All Fight Details</b> </p>
+            </div>
+            <div class="card-body" style="overflow-x:auto;">
+
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Airline</th>
+                        <th scope="col">From PLace</th>
+                        <th scope="col">To PLace</th>
+                        <th scope="col">Departure Date</th>
+                        <th scope="col">Departure Time</th>
+                        <th scope="col">Schedule Days</th>
+                        <th scope="col">Trip Type</th>
+                        <th scope="col">Flight Status</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let u of airlineDetails; index as i">
+                        <td>{{u.airline}}</td>
+                        <td>{{u.fromPlace}}</td>
+                        <td>{{u.toPlace}}</td>
+                        <td>{{u.departDate | date:'dd/MM/yyyy'}}</td>
+                        <td>{{u.departureTime}}</td>
+                        <td>{{u.scheduleDays}}</td>
+                        <td>{{u.tripType}}</td>
+                        <td class="label label-success">{{u.flightStatus ? 'Active' : 'Inactive'}}</td>
+                        <td>
+                          <!-- <button mat-raised-button (click)="openDialog(u.flightNo)"><span class="material-icons">visibility</span></button>   -->
+                            <a title="Edit" routerLink="/viewAirlineDetails/{{u.flightNo}}" title="View flight" data-toggle="tooltip"><span class="material-icons">visibility</span></a>
+                            <a class="edit" routerLink="/editFlightDetails/{{u.flightNo}}" title="Edit flight" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <!-- <button mat-raised-button class="btn btn-danger" *ngIf="u.flightStatus" (click)="openModalBlock(u.flightNo)" title="Block flight">Block</button>   -->
+                            <a *ngIf="u.flightStatus" class="delete" (click)="openModalBlock(u.flightNo)" title="Block flight" data-toggle="tooltip"><span class="material-icons">block</span></a>
+                                <a class="" *ngIf="!u.flightStatus" (click)="openModalUnblock(u.flightNo)" title="Unblock flight" data-toggle="tooltip"><i class="fa fa-unlock" style="font-size:30px;color:green"></i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="text-center">
+                    <p *ngIf="airlineDetails.length === 0">No records found</p>
+                  </div>
+            </div>
+            </div>
+        </div>
+</main>
+
+    <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayBlock}">
+         <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                     <div class="modal-header modal-bg">
+                           <!-- <h4 class="modal-title">Block Flight</h4>
+                           <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button> -->
+                         </div>
+                    <div class="modal-body text-center modal-bg-body">
+                           <form class="example-form" #form="ngForm" (ngSubmit)="onFormSubmitBlock()" ngNativeValidate>
+                            <mat-slide-toggle ngModel name="acceptTerms" required>Please confirm if you want to block this flight route?</mat-slide-toggle><br/>
+                            <button class="btn btn-danger" mat-raised-button type="submit">Confirm</button>
+                          </form>
+                         </div>
+                     <div class="modal-footer modal-bg">
+                           <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+                           <!-- <button type="button" class="btn btn-danger">Confirm</button> -->
+                          
+                         </div>
+            </div> 
+             </div>
+ </div>
+
+ <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayUnblock}">
+    <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header modal-bg">
+                      <!-- <h4 class="modal-title">Unblock Flight</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button> -->
+                    </div>
+               <div class="modal-body text-center modal-bg-body">
+                      <form class="example-form" #form="ngForm" (ngSubmit)="onFormSubmitUnblock()" ngNativeValidate>
+                       <mat-slide-toggle ngModel name="acceptTerms" required>Please confirm if you want to Unblock this flight route?</mat-slide-toggle><br/>
+                       <button class="btn btn-danger" mat-raised-button type="submit">Confirm</button>
+                     </form>
+                    </div>
+                <div class="modal-footer modal-bg">
+                      <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+                      <!-- <button type="button" class="btn btn-danger">Confirm</button> -->
+                     
+                    </div>
+       </div> 
+        </div>
+</div>

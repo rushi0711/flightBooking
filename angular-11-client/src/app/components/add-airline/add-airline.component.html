@@ -1,0 +1,186 @@
+<br/><main>
+    <div class="container">
+  
+      <div class="card text-center">
+        <div class="card-header">
+            <img src="assets/card_fligh_img.png" class="center" style="width: 7rem;" alt="..." /> 
+              <p style="clear:both"><b>Add Flight</b> </p>
+         </div>
+        <div class="card-body">
+          <!-- <h5 class="card-title">Card title/h5> -->
+          
+            <div *ngIf="!addedSuccess">
+            <div [formGroup]="add_flight_form">   
+                <div class="row">
+                    <!-- <div class="col-12"> -->
+                        <div class="col-md-6">
+                            <div class="mat-form-field--inline">
+                                <mat-form-field >
+                                    <input matInput placeholder="From Place" formControlName="fromplace" [(ngModel)]="airlineDetails.fromPlace">
+                                    <mat-error *ngIf="add_flight_form.controls['fromplace'].hasError('required') && (add_flight_form.controls['fromplace'].dirty || add_flight_form.controls['fromplace'].touched)" >
+                                        This field is required
+                                      </mat-error>
+                                  </mat-form-field>
+                                  
+                                <!-- <span class="input-group-text" id="fromPlaceLabel">From Place</span>
+                                <input type="text" formControlName="fromplace" class="form-control" [(ngModel)]="airlineDetails.fromPlace" placeholder="Enter from place" aria-label="From place input" aria-describedby="inputGroup-from-place"> -->
+                                <!-- <span class="text-danger" *ngIf="add_flight_form.controls['fromplace'].hasError('required') && (add_flight_form.controls['fromplace'].dirty || add_flight_form.controls['fromplace'].touched)">This field is required</span> -->
+                            </div><br/>
+                            <div class="mat-form-field--inline">
+                                <mat-form-field >
+                                    <input matInput placeholder="To Place" formControlName="toPlace" [(ngModel)]="airlineDetails.toPlace">
+                                    <mat-error *ngIf="add_flight_form.controls['toPlace'].hasError('required') && (add_flight_form.controls['toPlace'].dirty || add_flight_form.controls['toPlace'].touched)" >
+                                        This field is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div><br/>
+                            <div class="mat-form-field--inline">
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Choose Airline</mat-label>
+                                    <mat-select formControlName="airline" [(ngModel)]="airlineDetails.airline">
+                                      <mat-option *ngFor="let c of airlines" [value]="c.id">
+                                        {{c.name}}
+                                      </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="add_flight_form.controls['airline'].hasError('required') && (add_flight_form.controls['airline'].dirty || add_flight_form.controls['airline'].touched)" >
+                                        This field is required
+                                    </mat-error>
+                                  </mat-form-field>
+
+                                <!-- <span class="input-group-text" id="airlineLable">Choose Airline</span>
+                                <select formControlName="airline" [(ngModel)]="airlineDetails.airline">
+                                    <option [ngValue]="null" selected disabled>Select Airline</option>
+                                    <option class="form-control" *ngFor="let c of airlines" [ngValue]="c.id">{{c.name}}</option>
+                                  </select>
+                                  <span class="input-group-text text-danger" *ngIf="add_flight_form.controls['airline'].hasError('required') && (add_flight_form.controls['airline'].dirty || add_flight_form.controls['airline'].touched)">This field is required</span> -->
+                            </div><br/>
+                            <div class="mat-form-field--inline">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Schedule Days</mat-label>
+                                    <mat-select formControlName="scheduleDays" [(ngModel)]="airlineDetails.scheduleDays">
+                                      <mat-option *ngFor="let s of scheduleDays" [value]="s.id">
+                                        {{s.name}}
+                                      </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="add_flight_form.controls['scheduleDays'].hasError('required') && (add_flight_form.controls['scheduleDays'].dirty || add_flight_form.controls['scheduleDays'].touched)" >
+                                        This field is required
+                                    </mat-error>
+                                  </mat-form-field>
+                            </div><br/>
+                            <div class="mat-form-field--inline">
+                                <!-- <span class="input-group-text" id="departDateLabel">Departure Date</span> -->
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Departure Date</mat-label>
+                                    <input matInput [matDatepicker]="picker" formControlName="departDate" [(ngModel)]="airlineDetails.departDate" [attr.disabled]="butDisabled" readonly>
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                    <mat-error *ngIf="add_flight_form.controls['departDate'].hasError('required') && (add_flight_form.controls['departDate'].dirty || add_flight_form.controls['departDate'].touched)" >
+                                        This field is required
+                                    </mat-error>
+                                  </mat-form-field>
+                                  <!-- <span class="input-group-text text-danger" *ngIf="add_flight_form.controls['departDate'].hasError('required') && (add_flight_form.controls['departDate'].dirty || add_flight_form.controls['departDate'].touched)">This field is required</span>  -->
+                            </div><br/>
+                            <div class="mat-form-field--inline">
+                                <mat-form-field>
+                                    <input matInput type="time" placeholder="Departure Time" formControlName="departTime" [(ngModel)]="airlineDetails.departureTime">
+                                    <mat-error *ngIf="add_flight_form.controls['departTime'].hasError('required') && (add_flight_form.controls['departTime'].dirty || add_flight_form.controls['departTime'].touched)" >
+                                        This field is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div><br/>
+                            <div class="mat-form-field--inline">
+
+                                <mat-form-field>
+                                    <input matInput type="time" placeholder="Departure Time" formControlName="arrivalTime" [(ngModel)]="airlineDetails.arrivalTime">
+                                    <mat-error *ngIf="add_flight_form.controls['arrivalTime'].hasError('required') && (add_flight_form.controls['arrivalTime'].dirty || add_flight_form.controls['arrivalTime'].touched)" >
+                                        This field is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div><br/>
+                        </div>
+
+                        <div class="col-md-6">
+                            <br/>
+                            <div class="mat-form-field--inline">
+                                <label>Trip Type&nbsp;&nbsp; &nbsp;</label>
+                                <mat-radio-group formControlName="tripType" [(ngModel)]="airlineDetails.tripType" aria-label="Select an option">
+                                    <mat-radio-button value="One-Way">One Way</mat-radio-button>
+                                    <mat-radio-button value="Return">Return</mat-radio-button>
+                                 </mat-radio-group><br/>
+                                 <mat-error *ngIf="add_flight_form.controls['tripType'].hasError('required') && (add_flight_form.controls['tripType'].dirty || add_flight_form.controls['tripType'].touched)" >
+                                    This field is required
+                                </mat-error>
+                            </div><br/>
+                            <div class="mat-form-field--inline">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Instrument Used</mat-label>
+                                    <mat-select formControlName="istrumentUsed" [(ngModel)]="airlineDetails.instrumentUsed">
+                                      <mat-option *ngFor="let c of instrumentUsed" [value]="c.id">
+                                        {{c.name}}
+                                      </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="add_flight_form.controls['istrumentUsed'].hasError('required') && (add_flight_form.controls['istrumentUsed'].dirty || add_flight_form.controls['istrumentUsed'].touched)" >
+                                        This field is required
+                                    </mat-error>
+                                  </mat-form-field>
+                            </div><br/>
+                            <div class="mat-form-field--inline">
+                                <mat-form-field >
+                                    <input matInput type="number" placeholder="Business Seats" formControlName="businessSeats" [(ngModel)]="airlineDetails.businessSeats">
+                                    <mat-error *ngIf="add_flight_form.controls['businessSeats'].hasError('required') && (add_flight_form.controls['businessSeats'].dirty || add_flight_form.controls['businessSeats'].touched)" >
+                                        This field is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div><br/>
+                            <div class="mat-form-field--inline">
+                                <mat-form-field >
+                                    <input matInput type="number" placeholder="Economy Seats" formControlName="economySeats" [(ngModel)]="airlineDetails.economySeats">
+                                    <mat-error *ngIf="add_flight_form.controls['economySeats'].hasError('required') && (add_flight_form.controls['economySeats'].dirty || add_flight_form.controls['economySeats'].touched)" >
+                                        This field is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div><br/>
+                            <div class="mat-form-field--inline">
+                                <mat-form-field >
+                                    <input matInput type="number" placeholder="Ticket Cost" formControlName="itemPrice" [(ngModel)]="airlineDetails.ticketCost">
+                                    <mat-error *ngIf="add_flight_form.controls['itemPrice'].hasError('required') && (add_flight_form.controls['itemPrice'].dirty || add_flight_form.controls['itemPrice'].touched)" >
+                                        This field is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div><br/>
+                            <div class="mat-form-field--inline">
+
+                                <mat-form-field >
+                                    <input matInput type="number" placeholder="Number of Rows" formControlName="noOfRows" [(ngModel)]="airlineDetails.noOfRows">
+                                    <mat-error *ngIf="add_flight_form.controls['noOfRows'].hasError('required') && (add_flight_form.controls['noOfRows'].dirty || add_flight_form.controls['noOfRows'].touched)" >
+                                        This field is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div><br/>
+                            <div class="mat-form-field--inline">
+
+                                <label>Meal Type&nbsp;&nbsp; &nbsp;</label>
+                                <mat-radio-group formControlName="mealType" [(ngModel)]="airlineDetails.mealType" aria-label="Select an option">
+                                    <mat-radio-button value="Veg">Veg</mat-radio-button>
+                                    <mat-radio-button value="Non-Veg">Non-Veg</mat-radio-button>
+                                 </mat-radio-group><br/>
+                                 <mat-error *ngIf="add_flight_form.controls['mealType'].hasError('required') && (add_flight_form.controls['mealType'].dirty || add_flight_form.controls['mealType'].touched)" >
+                                    This field is required
+                                </mat-error>
+                            </div><br/>
+                        </div>
+                    <!-- </div> -->
+        </div>
+              <button type="button" (click)="addFlight()" class="btn btn-primary" ><i class="fa fa-check" aria-hidden="true"></i> Add Flight</button>
+         </div>     
+          </div>
+          <div class="text-center alert alert-success" *ngIf="addedSuccess">
+            <p >New Flight route has been added successfully with flight number :{{message}}.</p>
+            <p>You can check  <a routerLink="/scheduledFlights" aria-current="page">scheduled Flight</a> </p>
+          </div>
+        </div>
+      </div>
+  </div>
+  </main>

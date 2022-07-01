@@ -1,0 +1,20 @@
+select, option {
+    width: 300px;
+  }
+
+  option {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+  
+  
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }

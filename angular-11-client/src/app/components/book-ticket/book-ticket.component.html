@@ -1,0 +1,80 @@
+  
+  <!-- <form class="example-form"> -->
+    <div *ngIf="!bookedSuccess">
+      <div [formGroup]="book_ticket_form"> 
+    <div class="col-md-8 mx-auto">
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input type="email" formControlName="emailControl" [(ngModel)]="bookingTickets.email" matInput [errorStateMatcher]="matcher"
+             placeholder="Ex. pat@example.com">
+      <!-- <mat-error  *ngIf="email.errors.email">
+        Please enter a valid email address
+      </mat-error> -->
+      <mat-error *ngIf="book_ticket_form.controls['emailControl'].hasError('required') && (book_ticket_form.controls['emailControl'].dirty || book_ticket_form.controls['emailControl'].touched)">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <label class="font-weight-bold">Opt for meal &nbsp; &nbsp;</label>
+      <mat-radio-group formControlName="optForMeal" [(ngModel)]="bookingTickets.optForMeal" aria-label="Select an option">
+        <mat-radio-button class="example-radio-button" value="Yes">Yes</mat-radio-button>
+        <mat-radio-button class="example-radio-button" value="No">No</mat-radio-button>
+        <mat-error *ngIf="book_ticket_form.controls['optForMeal'].hasError('required') && (book_ticket_form.controls['optForMeal'].dirty || book_ticket_form.controls['optForMeal'].touched)" >
+          This field is required
+        </mat-error>
+      </mat-radio-group>
+
+      <!-- <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Number of Seats</mat-label>
+        <input matInput type="number" placeholder="enter seat count" value="">
+      </mat-form-field> -->
+    
+      <div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Seat Number</mat-label>
+      <input matInput formControlName="seatNumber" [(ngModel)]="bookingTickets.seatNumber" type="number" placeholder="enter seat number" value="">
+      <mat-error *ngIf="book_ticket_form.controls['seatNumber'].hasError('required') && (book_ticket_form.controls['seatNumber'].dirty || book_ticket_form.controls['seatNumber'].touched)" >
+        This field is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Full Name</mat-label>
+        <input matInput formControlName="fullName" [(ngModel)]="bookingTickets.name" placeholder="enter full name" value="">
+        <mat-error *ngIf="book_ticket_form.controls['fullName'].hasError('required') && (book_ticket_form.controls['fullName'].dirty || book_ticket_form.controls['fullName'].touched)" >
+          This field is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Age</mat-label>
+        <input matInput type="number" formControlName="age" [(ngModel)]="bookingTickets.age" placeholder="enter age" value="">
+        <mat-error *ngIf="book_ticket_form.controls['age'].hasError('required') && (book_ticket_form.controls['age'].dirty || book_ticket_form.controls['age'].touched)" >
+          This field is required
+        </mat-error>
+      </mat-form-field>
+
+      <label class="font-weight-bold">Gender &nbsp; &nbsp;</label>
+      <mat-radio-group formControlName="gender" [(ngModel)]="bookingTickets.gender" aria-label="Select an option">
+        <mat-radio-button class="example-radio-button" value="Male">Male</mat-radio-button>
+        <mat-radio-button class="example-radio-button" value="Female">Female</mat-radio-button>
+        <mat-error *ngIf="book_ticket_form.controls['gender'].hasError('required') && (book_ticket_form.controls['gender'].dirty || book_ticket_form.controls['gender'].touched)" >
+          This field is required
+        </mat-error>
+      </mat-radio-group>
+    </div>
+      
+    <button type="button" (click)="bookTicket()" class="btn btn-primary" >Book Ticket</button>
+
+</div>
+</div>
+</div>
+  <!-- </form> -->
+
+  <div class="text-center alert alert-success" *ngIf="bookedSuccess">
+    <p >Your Flight has been booked successfully, you can track by PNR number :<b>{{pnrNumber}}</b>.</p>
+    <p *ngIf="!isLoggedIn">You can check by <a routerLink="/login" aria-current="page">clicking here </a> </p>
+    <p *ngIf="isLoggedIn">You can check by <a routerLink="/bookingHistory/{{userEmail}}" aria-current="page">clicking here </a> </p>
+  </div>
+  
